@@ -1,0 +1,15 @@
+<title>HRR</title>
+<h1>Browse routes</h1>
+<br>
+{% if session.username %}
+<p>You are logged in as {{ session.username }}</p>
+<br>
+<hr>
+{% for route in routes %}
+{{ route.name, route.type, route.length }}
+<hr>
+{% endfor %}
+<br>
+{% else %}
+Please login
+{% endif %}
