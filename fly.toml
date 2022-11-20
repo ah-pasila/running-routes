@@ -1,4 +1,4 @@
-# fly.toml file generated for tsoha-running-routes on 2022-11-20T14:48:40+02:00
+# fly.toml file generated for tsoha-running-routes on 2022-11-20T16:41:18+02:00
 
 app = "tsoha-running-routes"
 kill_signal = "SIGINT"
