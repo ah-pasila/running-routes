@@ -1,6 +1,7 @@
-tsoha-running-routes
+Running Routes Helsinki App
 
-Running Routes Helsinki
+Introduction
+
 
 This web application contains info about nice running routes in Helsinki.
 
@@ -17,3 +18,9 @@ Users can complete routes and save their times. After doing this, they are able 
 
 Admins are able to delete users, routes and reviews. Normal users can only delete their own 
 reviews and route suggestions. 
+
+Note on 20th November:
+
+I was not able to create db in Fly.io and the app can not unfortunately be tested. 
+However, the files are available in Github. So far I have created a simple login window (without password check),
+mvp form to save info on routes and a route browser.  
