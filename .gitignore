@@ -1,0 +1,4 @@
+.env
+__pycache__
+secretkeys.txt
+secretkeys.txt.pub
