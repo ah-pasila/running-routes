@@ -2,6 +2,7 @@ from app import app
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import users
+from db import db
 
 @app.route("/")
 def index():
@@ -48,6 +49,7 @@ def browseroutes():
     sql = "SELECT id, name, type, length FROM routes"
     result = db.session.execute(sql)
     routes = result.fetchall()
+    db.session.commit()
     return render_template("browseroutes.html", routes=routes)
 
 @app.route("/modifyroutes")
