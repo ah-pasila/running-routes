@@ -1,19 +1,19 @@
 <title>HRR</title>
-<h1>HRR Modify Routes</h1>
 <br>
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
 <br>
 <form action="/create" method="POST">
-<p>Name:<br>
+<p>Name of the route:<br>
 <input type="text" name="name"></p>
-<p>Type (round / linear):<br>
+<p> Type (round/linear):<br>
 <input type="text" name="type"></p>
-<p>Length (in km, format 1.0):<br>
+<p>Length in km (format 0.0):<br>
 <input type="numeric" name="length"></p>
-<input type="submit" value="Save"></p>
-</form>
 <br>
+<p>
+<input type="submit" value="Send"></p>
+</form>
 {% else %}
 Please login
 {% endif %}

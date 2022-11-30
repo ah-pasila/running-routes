@@ -1,7 +1,7 @@
 from app import app
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
-import users
+import users, runroutes
 from db import db
 
 @app.route("/")
@@ -22,15 +22,15 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/create", methods=["POST"])
+@app.route("/create", methods=["GET","POST"])
 def create():
     name = request.form["name"]
     type = request.form["type"]
     length = request.form["length"]
-    sql = "INSERT INTO routes (name, type, length, created_at) VALUES (:name, :type, :length, NOW())"
-    result = db.session.execute(sql, {"name":name, "type":type, "length":length})
-    db.session.commit()
-    return redirect("/")
+    if runroutes.create(name, type, length):
+        return redirect("/")
+    else:
+        return render_template("error.html", message="Error while creating a new route")
 
 @app.route("/newuser", methods=["GET","POST"])
 def newuser():
@@ -52,6 +52,6 @@ def browseroutes():
     db.session.commit()
     return render_template("browseroutes.html", routes=routes)
 
-@app.route("/modifyroutes")
-def modifyroutes():
-    return render_template("modifyroutes.html")
+@app.route("/newroute")
+def newroute():
+    return render_template("newroute.html")
