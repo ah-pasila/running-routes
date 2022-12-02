@@ -1,7 +1,8 @@
 from app import app
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
-import users, runroutes
+import users
+import runroutes
 from db import db
 
 @app.route("/")

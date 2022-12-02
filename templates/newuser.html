@@ -1,9 +1,12 @@
 <h1>Create a new user account</h1>
 <br>
 <form action="/newuser" method="post">
-Username: <input type="text" name="username">
+Username:<br>
+<input type="text" name="username" required>
 <p>
-Password: <input type="password" name="password">
+Password (minimum 8 charaters):<br>
+<input type="password" name="password" minlength="8" required>
 <p>
-<input type="submit" value="Create user account">
+<input type="submit" value="Create a user account">
 </form>
+
