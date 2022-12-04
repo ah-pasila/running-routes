@@ -6,15 +6,16 @@
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
 <br>
-<form action="/create" method="POST">
+<form action="/create" method="POST" enctype="multipart/form-data">
 <p>Name of the route:<br>
 <input type="text" name="name"></p>
 <p> Type (round/linear):<br>
 <input type="text" name="type"></p>
 <p>Length in km (format 0.0):<br>
 <input type="numeric" name="length"></p>
-<br>
+<p>File: <input type="file" name="file"></p>
 <p>
+<br>
 <input type="submit" value="Send"></p>
 </form>
 {% else %}

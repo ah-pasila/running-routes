@@ -13,6 +13,14 @@ CREATE TABLE routes (
     created_by INTEGER REFERENCES users
 );
 
+CREATE TABLE maps (
+    id SERIAL PRIMARY KEY,
+    filename TEXT,
+    route_name TEXT REFERENCES routes,
+    added_by INTEGER REFERENCES users
+    data BYTEA
+);
+
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     route_id INTEGER REFERENCES routes,

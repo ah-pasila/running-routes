@@ -15,3 +15,25 @@ def browseroutes():
     result = db.session.execute(sql)
     routes = result.fetchall()
     db.session.commit()
+
+def savemap():
+    file = request.files["file"]
+    name = file.filename
+    if not name.endswith(".jpg"):
+        return "Invalid filename"
+    data = file.read()
+    if len(data) > 300*1024:
+        return "Too big file"
+    sql = "INSERT INTO maps (name,data) VALUES (:name,:data)"
+    db.session.execute(sql, {"name":name, "data":data})
+    db.session.commit()
+    return "OK"
+
+@app.route("/show/<int:id>")
+def showmap(id):
+    sql = "SELECT data FROM maps WHERE id=:id"
+    result = db.session.execute(sql, {"id":id})
+    data = result.fetchone()[0]
+    response = make_response(bytes(data))
+    response.headers.set("Content-Type", "image/jpeg")
+    return response
