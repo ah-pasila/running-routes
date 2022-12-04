@@ -56,3 +56,7 @@ def browseroutes():
 @app.route("/newroute")
 def newroute():
     return render_template("newroute.html")
+
+@app.route("/reviewroute")
+def reviewroute():
+    return render.template("reviewroute.html")
