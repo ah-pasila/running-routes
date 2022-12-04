@@ -1,2 +1,5 @@
-Oops, error: {{ message}}
-
+{% extends "layout.html" %}
+{% block title %}Error{% endblock %}
+{% block content %}
+Sorry, error: {{ message}}
+{% endblock %}

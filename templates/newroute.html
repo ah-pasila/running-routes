@@ -1,5 +1,7 @@
-<title>HRR</title>
-<h1>Create a new route</h1>
+{% extends "layout.html" %}
+{% block title %}Create route{% endblock %}
+{% block content %} 
+<h2>Create a new route</h2>
 <br>
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
@@ -18,3 +20,4 @@
 {% else %}
 Please login
 {% endif %}
+{% endblock %}

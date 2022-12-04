@@ -1,4 +1,7 @@
-<h1>Create a new user account</h1>
+{% extends "layout.html" %}
+{% block title %}New user{% endblock %}
+{% block content %}
+<h2>Create a new user account</h2>
 <br>
 <form action="/newuser" method="post">
 Username:<br>
@@ -9,4 +12,4 @@ Password (minimum 8 charaters):<br>
 <p>
 <input type="submit" value="Create a user account">
 </form>
-
+{% endblock %}

@@ -1,7 +1,9 @@
-<title>RRH</title>
+{% extends "layout.html" %}
+{% block title %}Front page{% endblock %}
+{% block content %}
 <img src="/static/temp_logo.jpg">
 <br>
-Welcome to Running routes Helsinki App!
+<h2>Welcome to Running routes Helsinki App!</h2>
 <br>
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
@@ -24,3 +26,4 @@ New around here?
 <br>
 <a href="/newuser">Create a user account</a>
 {% endif %}
+{% endblock %}
