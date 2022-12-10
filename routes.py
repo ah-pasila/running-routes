@@ -47,10 +47,7 @@ def newuser():
 
 @app.route("/browseroutes")
 def browseroutes():
-    sql = "SELECT id, name, type, length FROM routes"
-    result = db.session.execute(sql)
-    routes = result.fetchall()
-    db.session.commit()
+    routes = runroutes.get_routes()
     return render_template("browseroutes.html", routes=routes)
 
 @app.route("/newroute")

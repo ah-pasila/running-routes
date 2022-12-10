@@ -21,12 +21,19 @@ def logout():
 def newuser(username, password):
     hash_value = generate_password_hash(password)
     try:
-        sql = "INSERT INTO users (username, password,role) VALUES (:username, :password, :0)"
-        db.session.execute(sql, {"username":username, "password":hash_value, "role":0})
+        sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)"
+        db.session.execute(sql, {"username":username, "password":hash_value, "role":"0"})
         db.session.commit()
     except:
         return False
     return login(username, password)
 
-def user_name_check():
+def username_check():
     return session.get("username",0)
+
+def get_user_id():
+    username = session["username"]
+    sql = "SELECT id FROM users WHERE username=:username"
+    result = db.session.execute(sql, {"username":username})
+    user_id = result.fetchone()
+    return user_id
