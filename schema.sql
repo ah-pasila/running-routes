@@ -17,8 +17,7 @@ CREATE TABLE routes (
 CREATE TABLE maps (
     id SERIAL PRIMARY KEY,
     filename TEXT,
-    route_name TEXT REFERENCES routes,
-    added_by INTEGER REFERENCES users
+    route_id INTEGER REFERENCES routes,
     data BYTEA
 );
 
