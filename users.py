@@ -35,5 +35,6 @@ def get_user_id():
     username = session["username"]
     sql = "SELECT id FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
-    user_id = result.fetchone()
+    user_info = result.fetchone()
+    user_id = user_info[0]
     return user_id

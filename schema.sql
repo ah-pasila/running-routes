@@ -25,5 +25,6 @@ CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     route_id INTEGER REFERENCES routes,
     grade INTEGER NOT NULL,
-    review TEXT NOT NULL
+    review TEXT NOT NULL,
+    created_by INTEGER REFERENCES users
 );
