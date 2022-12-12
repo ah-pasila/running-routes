@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Browse reviews{% endblock %}
+{% block content %}
+<h2>Browse reviews</h2>
+<br>
+{% if session.username %}
+<p>You are logged in as {{ session.username }}</p>
+<br>
+{% for review in reviewlist %}
+{{ review.name, review.username, review.grade, review.review }}
+<hr>
+{% endfor %}
+<br>
+{% else %}
+Please login
+{% endif %}
+{% endblock %}

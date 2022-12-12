@@ -3,4 +3,22 @@
 {% block content %}
 <h2>Review a route</h2>
 <br>
+{% if session.username %}
+<p>You are logged in as {{ session.username }}</p>
+<br>
+Leave a review for a route:
+<br>
+<form action="/createreview" method="POST">
+<p>Name of the route:<br>
+<input type="text" name="routename"></p>
+<p>Grade (1 - 5; 1 = not good, 5 = excellent):<br>
+<input type="numeric" name="grade"></p>
+<p>Review:<br>
+<textarea name="review" rows="3" cols="40"></textarea></p>
+<br>
+<input type="submit" value="Send"></p>
+</form>
+{% else %}
+Please login
+{% endif %}
 {% endblock %}

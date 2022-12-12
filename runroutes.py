@@ -17,9 +17,9 @@ def get_routes():
 
 def get_route_id(routename):
     sql = "SELECT id FROM routes WHERE name=:routename"
-    result = db.session.execute(sql, {"name":routename})
+    result = db.session.execute(sql, {"routename":routename})
     route_info = result.fetchone()
-    route_id = route_info[1]
+    route_id = route_info[0]
     return route_id
 
 def savemap():
