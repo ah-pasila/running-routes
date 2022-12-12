@@ -10,6 +10,7 @@ CREATE TABLE routes (
     name TEXT NOT NULL,
     type TEXT,
     length NUMERIC(5,1),
+    coordinates TEXT,
     created_at TIMESTAMP,
     created_by INTEGER REFERENCES users
 );

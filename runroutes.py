@@ -1,19 +1,26 @@
 from db import db
 import users
 
-def create(name, type, length):
+def create(name, type, length, coordinates):
     user_id = users.get_user_id()
     if user_id == 0:
         return False
-    sql = "INSERT INTO routes (name, type, length, created_at, created_by) VALUES (:name, :type, :length, NOW(), :created_by)"
-    db.session.execute(sql, {"name":name, "type":type, "length":length, "created_by":"1"})
+    sql = "INSERT INTO routes (name, type, length, coordinates, created_at, created_by) VALUES (:name, :type, :length, :coordinates, NOW(), :created_by)"
+    db.session.execute(sql, {"name":name, "type":type, "length":length, "coordinates":coordinates, "created_by":user_id})
     db.session.commit()
     return True
 
 def get_routes():
-    sql = "SELECT R.name, R.type, R.length, U.username FROM routes R, users U WHERE U.id = R.created_by"
+    sql = "SELECT R.name, R.type, R.coordinates, R.length, U.username FROM routes R, users U WHERE U.id = R.created_by"
     result = db.session.execute(sql)
     return result.fetchall()
+
+def get_route_id(routename):
+    sql = "SELECT id FROM routes WHERE name=:routename"
+    result = db.session.execute(sql, {"name":routename})
+    route_info = result.fetchone()
+    route_id = route_info[1]
+    return route_id
 
 def savemap():
     file = request.files["file"]

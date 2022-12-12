@@ -3,6 +3,7 @@ from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import users
 import runroutes
+import reviews
 from db import db
 
 @app.route("/")
@@ -28,7 +29,8 @@ def create():
     name = request.form["name"]
     type = request.form["type"]
     length = request.form["length"]
-    if runroutes.create(name, type, length):
+    coordinates = request.form["coordinates"]
+    if runroutes.create(name, type, length, coordinates):
         return redirect("/")
     else:
         return render_template("error.html", message="Error while creating a new route")
@@ -56,4 +58,19 @@ def newroute():
 
 @app.route("/reviewroute")
 def reviewroute():
-    return render.template("reviewroute.html")
+    return render_template("reviewroute.html")
+
+@app.route("/createreview", methods=["GET","POST"])
+def createreview():
+    routename=request.form["routename"]
+    grade=request.form["grade"]
+    review=request.form["review"]
+    if reviews.create_review(routename, grade, review):
+        return redirect("/")
+    else:
+        return render_template("error.html", message="Error while creating a new review")
+
+@app.route("/browsereviews")
+def browsereviews():
+    reviewlist = reviews.get_reviews()
+    return render_template("browsereviews.html", reviewlist=reviewlist)

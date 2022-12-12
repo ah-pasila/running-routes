@@ -5,17 +5,29 @@
 <br>
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
-<br>
-<form action="/create" method="POST" enctype="multipart/form-data">
+Instructions for saving route info:<br>
+<ol>
+    <li> Go to (opens a new window/tab): <a href="https://www.google.fi/maps/" target="_blank">Google Maps</a>.
+    <li> Locate the starting point of the route by clicking the map.
+    <li> Copy the coordinates below.
+    <li> Return to the map. Right click and select "Measure distance".
+    <li> Click on the map to create a route.
+    <li> Finish the route and save the distance below.
+    <li> Use your screen capture tool to save the map in .jpg format.
+    <li> Upload the info by clicking send.
+</ol>
+<form action="create" method="POST" enctype="multipart/form-data">
 <p>Name of the route:<br>
 <input type="text" name="name"></p>
-<p> Type (round/linear):<br>
+<p>Type (round/linear):<br>
 <input type="text" name="type"></p>
 <p>Length in km (format 0.0):<br>
 <input type="numeric" name="length"></p>
-<p>File: <input type="file" name="file"></p>
+<p>Starting coordinates:<br>
+<input type="text" name="coordinates"></p>
+<p>File: <br>
+<input type="file" name="file"></p>
 <p>
-<br>
 <input type="submit" value="Send"></p>
 </form>
 {% else %}
