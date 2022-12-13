@@ -10,13 +10,13 @@ Instructions for saving route info:<br>
     <li> Go to (opens a new window/tab): <a href="https://www.google.fi/maps/" target="_blank">Google Maps</a>.
     <li> Locate the starting point of the route by clicking the map.
     <li> Copy the coordinates below.
-    <li> Return to the map. Right click and select "Measure distance".
+    <li> Return to Google Maps. Right click and select "Measure distance".
     <li> Click on the map to create a route.
     <li> Finish the route and save the distance below.
-    <li> Use your screen capture tool to save the map in .jpg format.
-    <li> Upload the info by clicking send.
+    <li> Return to Google maps. Use your screen capture tool to save the map in .jpg format.
+    <li> Save the basic info below. Continue to save the .jpg map.
 </ol>
-<form action="create" method="POST" enctype="multipart/form-data">
+<form action="/create" method="POST">
 <p>Name of the route:<br>
 <input type="text" name="name"></p>
 <p>Type (round/linear):<br>
@@ -25,10 +25,8 @@ Instructions for saving route info:<br>
 <input type="numeric" name="length"></p>
 <p>Starting coordinates:<br>
 <input type="text" name="coordinates"></p>
-<p>File: <br>
-<input type="file" name="file"></p>
-<p>
-<input type="submit" value="Send"></p>
+<br>
+<input type="submit" value="Save"></p>
 </form>
 {% else %}
 Please login

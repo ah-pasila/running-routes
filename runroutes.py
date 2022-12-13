@@ -15,6 +15,11 @@ def get_routes():
     result = db.session.execute(sql)
     return result.fetchall()
 
+def get_route_names():
+    sql = "SELECT name from routes"
+    result = db.session.execute(sql)
+    return result.fetchall()
+
 def get_route_id(routename):
     sql = "SELECT id FROM routes WHERE name=:routename"
     result = db.session.execute(sql, {"routename":routename})
