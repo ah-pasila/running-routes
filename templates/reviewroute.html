@@ -8,8 +8,22 @@
 <br>
 Leave a review for a route:
 <br>
-<form action="/createreview" method="POST">
-<p>Name of the route:<br>
+<ul>
+{% for route in routes %}
+<li>{{ route.name }}
+{% endfor %}
+</ul>
+<form action="/createreview" method="POST"> 
+<label for="routename">Name of the route:</label>
+<br>
+<select id="routename" name="routename">
+<option value =
+{% for route in routes %}
+{{ route.name }}></option>
+{% endfor %}
+</select>
+<br>
+Name of the route:
 <input type="text" name="routename"></p>
 <p>Grade (1 - 5; 1 = not good, 5 = excellent):<br>
 <input type="numeric" name="grade"></p>
