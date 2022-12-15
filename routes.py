@@ -62,19 +62,22 @@ def savemain():
 
 @app.route("/newmap")
 def newmap():
-    return render_template("newmap.html")
+    routes = runroutes.get_route_names()
+    return render_template("newmap.html", routes=routes)
 
-@app.route("/uploadmap", methods=["POST"])
+@app.route("/uploadmap", methods=["GET", "POST"])
 def uploadmap():
+    routename = request.form["routename"]
     file = request.files["file"]
-    name = file.filename
-    if not name.endswith(".jpg"):
+    filename = file.filename
+    if not filename.endswith(".jpg"):
         return render_template(error.html, message="Error, invalid format, use .jpg images")
     data = file.read()
     if len(data) > 300*1024:
         return render_template(error.html, message="Error, file is too big, size limit is 300 kt")
-    sql = "INSERT INTO maps (name, data) VALUES (:name,:data)"
-    db.session.execute(sql, {"name":name, "data":data})
+    route_id = runroutes.get_route_id(routename)
+    sql = "INSERT INTO maps (filename, route_id, data) VALUES (:filename, :route_id, :data)"
+    db.session.execute(sql, {"filename":filename, "route_id":route_id, "data":data})
     db.session.commit()
     return redirect("/")
 

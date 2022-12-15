@@ -7,6 +7,7 @@
 <p>You are logged in as {{ session.username }}</p>
 Instructions for saving route info:<br>
 <ol>
+    <li> Give the name and type of the route.
     <li> Go to (opens a new window/tab): <a href="https://www.google.fi/maps/" target="_blank">Google Maps</a>.
     <li> Locate the starting point of the route by clicking the map.
     <li> Copy the coordinates below.
@@ -19,8 +20,11 @@ Instructions for saving route info:<br>
 <form action="/create" method="POST">
 <p>Name of the route:<br>
 <input type="text" name="name"></p>
-<p>Type (round/linear):<br>
-<input type="text" name="type"></p>
+<p>Type (round: A to A, linear: A to B):<br>
+<select name="type"><br>
+<option value=Round>A to A</option>
+<option value=Linear>A to B</option>
+</select><br>
 <p>Length in km (format 0.0):<br>
 <input type="numeric" name="length"></p>
 <p>Starting coordinates:<br>

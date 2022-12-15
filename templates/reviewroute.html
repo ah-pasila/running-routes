@@ -6,27 +6,23 @@
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
 <br>
-Leave a review for a route:
-<br>
-<ul>
-{% for route in routes %}
-<li>{{ route.name }}
-{% endfor %}
-</ul>
 <form action="/createreview" method="POST"> 
-<label for="routename">Name of the route:</label>
+Select route name:
 <br>
-<select id="routename" name="routename">
-<option value =
+<select name="routename" method="GET" action="/">
 {% for route in routes %}
-{{ route.name }}></option>
+<option value="{{ route.name }}" SELECTED>{{route.name}}</option>
 {% endfor %}
 </select>
 <br>
-Name of the route:
-<input type="text" name="routename"></p>
-<p>Grade (1 - 5; 1 = not good, 5 = excellent):<br>
-<input type="numeric" name="grade"></p>
+Grade (1-5; 1 = not good, 5 = excellent):<br>
+<select name="grade">
+<option value=1>1</option>
+<option value=2>2</option>
+<option value=3>3</option>
+<option value=4>4</option>
+<option value=5>5</option>
+</select>
 <p>Review:<br>
 <textarea name="review" rows="3" cols="40"></textarea></p>
 <br>
