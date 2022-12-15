@@ -1,5 +1,6 @@
 from db import db
 import users
+from flask import make_response
 
 def create(name, type, length, coordinates):
     user_id = users.get_user_id()
@@ -11,7 +12,7 @@ def create(name, type, length, coordinates):
     return True
 
 def get_routes():
-    sql = "SELECT R.name, R.type, R.coordinates, R.length, U.username FROM routes R, users U WHERE U.id = R.created_by"
+    sql = "SELECT R.name, R.type, R.coordinates, R.length, U.username, R.id FROM routes R, users U WHERE U.id = R.created_by"
     result = db.session.execute(sql)
     return result.fetchall()
 
@@ -27,24 +28,17 @@ def get_route_id(routename):
     route_id = route_info[0]
     return route_id
 
-def savemap():
-    file = request.files["file"]
-    name = file.filename
-    if not name.endswith(".jpg"):
-        return "Invalid filename"
-    data = file.read()
-    if len(data) > 300*1024:
-        return "Too big file"
-    sql = "INSERT INTO maps (name,data) VALUES (:name,:data)"
-    db.session.execute(sql, {"name":name, "data":data})
-    db.session.commit()
-    return "OK"
-
-#@app.route("/show/<int:id>")
-#def showmap(id):
-#    sql = "SELECT data FROM maps WHERE id=:id"
-#    result = db.session.execute(sql, {"id":id})
-#    data = result.fetchone()[0]
-#    response = make_response(bytes(data))
-#    response.headers.set("Content-Type", "image/jpeg")
-#    return response
+#def savemap():
+#    routename = request.form[routename]
+#    file = request.files["file"]
+#    file = file.filename
+#    if not name.endswith(".jpg"):
+#        return "Invalid filename"
+#    data = file.read()
+#    if len(data) > 300*1024:
+#        return "Too big file"
+#    route_id = get_route_id(routename)
+#    sql = "INSERT INTO maps (name,data,route_id) VALUES (:name,:data,:route_id)"
+#    db.session.execute(sql, {"name":name, "data":data, "route_id":route_id })
+#    db.session.commit()
+#    return "OK"

@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, request, session, make_response
 from app import app
 import users
 import runroutes
@@ -100,3 +100,13 @@ def createreview():
 def browsereviews():
     reviewlist = reviews.get_reviews()
     return render_template("browsereviews.html", reviewlist=reviewlist)
+
+@app.route("/show/<int:id>")
+def show(id):
+    sql = "SELECT data FROM maps WHERE route_id=:id"
+    result = db.session.execute(sql, {"id":id})
+    data = result.fetchone()[0]
+    response = make_response(bytes(data))
+    response.headers.set("Content-Type", "image/jpeg")
+    return response
+

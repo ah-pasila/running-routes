@@ -7,7 +7,7 @@ CREATE TABLE users (
 
 CREATE TABLE routes (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
+    name TEXT UNIQUE NOT NULL,
     type TEXT,
     length NUMERIC(5,1),
     coordinates TEXT,
