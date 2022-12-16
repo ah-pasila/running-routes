@@ -110,3 +110,24 @@ def show(id):
     response.headers.set("Content-Type", "image/jpeg")
     return response
 
+@app.route("/newtime")
+def newtime():
+    routes = runroutes.get_route_names()
+    return render_template("newtime.html", routes=routes)
+
+@app.route("/browsepersonal")
+def browsepersonal():
+    id = users.get_user_id()
+    times = runroutes.get_route_times_by_user(id)
+    routes = runroutes.get_routes_by_user(id)
+    return render_template("browsepersonal.html", times=times, routes=routes)
+
+@app.route("/createtime", methods=["GET", "POST"])
+def createtime():
+    routename = request.form["routename"]
+    completion_date = request.form["completion_date"]
+    completion_time = request.form["completion_time"]
+    if runroutes.createtime(routename, completion_time, completion_date):
+       return redirect("/")
+    else:
+       return render_template("error.html", message="Error while adding a new running time")

@@ -11,6 +11,16 @@ def create(name, type, length, coordinates):
     db.session.commit()
     return True
 
+def createtime(routename, completion_time, completion_date):
+    runner_id = users.get_user_id()
+    route_id = get_route_id(routename)
+    if runner_id == 0:
+        return False
+    sql = "INSERT INTO times (route_id, runner_id, completion_date, completion_time) VALUES (:route_id, :runner_id, :completion_date, :completion_time)"
+    db.session.execute(sql, {"route_id":route_id, "runner_id":runner_id, "completion_date":completion_date, "completion_time":completion_time})
+    db.session.commit()
+    return True
+
 def get_routes():
     sql = "SELECT R.name, R.type, R.coordinates, R.length, U.username, R.id FROM routes R, users U WHERE U.id = R.created_by"
     result = db.session.execute(sql)
@@ -21,6 +31,13 @@ def get_route_names():
     result = db.session.execute(sql)
     return result.fetchall()
 
+def get_route_name(route_id):
+    sql = "SELECT name FROM routes WHERE id=route_id"
+    result = db.session.execute(sql, {"route_id":route_id})
+    route.info = result.fetchone()
+    routename = route_info[1]
+    return routename
+
 def get_route_id(routename):
     sql = "SELECT id FROM routes WHERE name=:routename"
     result = db.session.execute(sql, {"routename":routename})
@@ -28,17 +45,13 @@ def get_route_id(routename):
     route_id = route_info[0]
     return route_id
 
-#def savemap():
-#    routename = request.form[routename]
-#    file = request.files["file"]
-#    file = file.filename
-#    if not name.endswith(".jpg"):
-#        return "Invalid filename"
-#    data = file.read()
-#    if len(data) > 300*1024:
-#        return "Too big file"
-#    route_id = get_route_id(routename)
-#    sql = "INSERT INTO maps (name,data,route_id) VALUES (:name,:data,:route_id)"
-#    db.session.execute(sql, {"name":name, "data":data, "route_id":route_id })
-#    db.session.commit()
-#    return "OK"
+def get_route_times_by_user(id):
+    sql = "SELECT R.name, T.completion_date, T.completion_time FROM times T, routes R WHERE T.route_id = R.id and T.runner_id=:id"
+    result = db.session.execute(sql, {"id":id})
+    return result.fetchall()
+
+def get_routes_by_user(id):
+    sql = "SELECT * FROM routes where created_by=:id"
+    result = db.session.execute(sql, {"id":id})
+    return result.fetchall()
+

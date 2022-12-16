@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Browse info{% endblock %}
+{% block content %}
+<h2>Browse personal info</h2>
+<br>
+{% if session.username %}
+<p>You are logged in as {{ session.username }}</p>
+<br>
+You have added these running times to HRR App:<br><br>
+{% for time in times %}
+{{ time.name, time.completion_date, time.completion_time }}
+<hr>
+{% endfor %}
+<br>
+You have added these routes to HRR App:<br><br>
+{% for route in routes %}
+{{ route.name, route.type, route.coordinates, route.length }}
+<a href="/show/{{ route.id }}">Map</a>
+<hr>
+{% endfor %}
+{% else %}
+Please login
+{% endif %}
+{% endblock %}
+
+
+
+
+
+

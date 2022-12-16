@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Add time{% endblock %}
+{% block content %}
+<h2>Save a running time</h2>
+<br>
+{% if session.username %}
+<p>You are logged in as {{ session.username }}</p>
+<form action="/createtime" method="POST">
+Add date:<br>
+<input type="date" name="completion_date"></p>
+Select route name:<br>
+<select name="routename" method="GET" action="/">
+{% for route in routes %}
+<option value="{{ route.name }}" SELECTED>{{route.name}}</option>
+{% endfor %}
+<br>
+</select>
+<p>Time in minutes and seconds (format 0.0):<br>
+<input type="numeric" name="completion_time"></p>
+<input type="submit" value="Save"></p>
+</form>
+{% else %}
+Please login
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+

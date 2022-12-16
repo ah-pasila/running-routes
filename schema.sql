@@ -29,3 +29,11 @@ CREATE TABLE reviews (
     review TEXT NOT NULL,
     created_by INTEGER REFERENCES users
 );
+
+CREATE TABLE times (
+    id SERIAL PRIMARY KEY;
+    route_id INTEGER REFERENCES routes,
+    runner_id INTEGER REFERENCES routes,
+    completion_date DATE,
+    completion_time NUMERIC(5,1)
+);
