@@ -7,11 +7,14 @@
 <p>You are logged in as {{ session.username }}</p>
 <br>
 <hr>
+<table border=1>
+<thead><tr><th>Route name</th><th>Type</th><th>Coordinates</th><th>Length</th><th>Added by</th><th>Map</th></tr></thead>
+<tbody>
 {% for route in routes %}
-{{ route.name, route.type, route.coordinates, route.length, route.username }} 
-<a href="/show/{{ route.id }}">Map</a>
-<hr>
+<tr><td>{{ route.name }}</td><td>{{ route.type }}</td><td>{{ route.coordinates }}</td><td>{{ route.length }}</td><td>{{ route.username }}</td><td><a href="/show/{{ route.id }}">Map</a></td></tr>
 {% endfor %}
+</tbody>
+</table>
 <br>
 {% else %}
 Please login

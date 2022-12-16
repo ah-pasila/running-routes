@@ -6,10 +6,14 @@
 {% if session.username %}
 <p>You are logged in as {{ session.username }}</p>
 <br>
+<table border=1>
+<thead><tr><th>Route name</th><th>Review by</th><th>Grade</th><th>Review</th></tr></thead>
+<tbody>
 {% for review in reviewlist %}
-{{ review.name, review.username, review.grade, review.review }}
-<hr>
+<tr><td>{{ review.name }}</td><td>{{ review.username }}</td><td>{{ review.grade }}</td><td>{{review.review }} </td></tr>
 {% endfor %}
+</tbody>
+</table>
 <br>
 {% else %}
 Please login

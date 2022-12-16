@@ -7,21 +7,30 @@
 <p>You are logged in as {{ session.username }}</p>
 <br>
 You have added these running times to HRR App:<br><br>
+<table border=1>
+<thead><tr><th>Route name</th><th>Completion date</th><th>Completion time</th></tr>
+<tbody>
 {% for time in times %}
-{{ time.name, time.completion_date, time.completion_time }}
-<hr>
+<tr><td>{{ time.name }}</td><td>{{ time.completion_date }}</td><td>{{ time.completion_time }}</td></tr>
 {% endfor %}
+</tbody>
+</table>
 <br>
 You have added these routes to HRR App:<br><br>
+<table border=1>
+<thead><tr><th>Route name</th><th>Type</th><th>Coordinates</th><th>Length</th><th>Map</th></tr></thead>
+<tbody>
 {% for route in routes %}
-{{ route.name, route.type, route.coordinates, route.length }}
-<a href="/show/{{ route.id }}">Map</a>
-<hr>
+<tr><td>{{ route.name }}</td><td>{{ route.type}}</td><td>{{ route.coordinates }}</td><td>{{ route.length }}</td>
+<td><a href="/show/{{ route.id }}">Map</a></td></tr>
 {% endfor %}
+</tbody>
+</table>
 {% else %}
 Please login
 {% endif %}
 {% endblock %}
+
 
 
 
