@@ -26,6 +26,28 @@ You have added these routes to HRR App:<br><br>
 {% endfor %}
 </tbody>
 </table>
+<br>
+Delete added route (removes route info, reviews and running times):
+<form action="/deleteroute" method="POST">
+<br>
+<select name="routename" method="GET" action="/">
+{% for route in routes %}
+<option value="{{ route.name }}" SELECTED>{{route.name}}</option>
+{% endfor %}
+</select>
+<input type="submit" value="Delete">
+</form>
+<br>
+<br>
+You have added these reviews to HRR App:<br><br>
+<table border=1>
+<thead><tr><th>Route name</th><th>Grade</th><th>Review</th></tr></thead>
+<tbody>
+{% for review in reviewlist %}
+<tr><td>{{ review.name }}</td><td>{{ review.grade }}</td><td>{{ review.review }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
 {% else %}
 Please login
 {% endif %}

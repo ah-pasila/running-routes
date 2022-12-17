@@ -76,10 +76,15 @@ def uploadmap():
     if len(data) > 300*1024:
         return render_template(error.html, message="Error, file is too big, size limit is 300 kt")
     route_id = runroutes.get_route_id(routename)
-    sql = "INSERT INTO maps (filename, route_id, data) VALUES (:filename, :route_id, :data)"
+    sql = "INSERT INTO maps (filename, route_id, data, visibility, created_at) VALUES (:filename, :route_id, :data, TRUE, NOW())"
     db.session.execute(sql, {"filename":filename, "route_id":route_id, "data":data})
     db.session.commit()
     return redirect("/")
+
+def hide_map(id):
+    sql = "UPDATE maps SET visibility=FALSE WHERE maps.route_id=id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
 
 @app.route("/reviewroute")
 def reviewroute():
@@ -103,7 +108,7 @@ def browsereviews():
 
 @app.route("/show/<int:id>")
 def show(id):
-    sql = "SELECT data FROM maps WHERE route_id=:id"
+    sql = "SELECT data FROM maps M, routes R WHERE M.route_id=:id AND R.visibility=TRUE"
     result = db.session.execute(sql, {"id":id})
     data = result.fetchone()[0]
     response = make_response(bytes(data))
@@ -115,12 +120,20 @@ def newtime():
     routes = runroutes.get_route_names()
     return render_template("newtime.html", routes=routes)
 
-@app.route("/browsepersonal")
+@app.route("/browsepersonal", methods=["GET", "POST"])
 def browsepersonal():
     id = users.get_user_id()
     times = runroutes.get_route_times_by_user(id)
     routes = runroutes.get_routes_by_user(id)
-    return render_template("browsepersonal.html", times=times, routes=routes)
+    reviewlist = reviews.get_reviews_by_user(id)
+    return render_template("browsepersonal.html", times=times, routes=routes, reviewlist=reviewlist)
+
+@app.route("/deleteroute", methods=["GET", "POST"])
+def deleteroute():
+    routename=request.form["routename"]
+    route_id=runroutes.get_route_id(routename)
+    runroutes.hide_route(id)
+    return redirect("/")
 
 @app.route("/createtime", methods=["GET", "POST"])
 def createtime():

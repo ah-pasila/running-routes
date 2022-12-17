@@ -12,14 +12,17 @@ CREATE TABLE routes (
     length NUMERIC(5,1),
     coordinates TEXT,
     created_at TIMESTAMP,
-    created_by INTEGER REFERENCES users
+    created_by INTEGER REFERENCES users,
+    visibility BOOLEAN
 );
 
 CREATE TABLE maps (
     id SERIAL PRIMARY KEY,
     filename TEXT,
     route_id INTEGER REFERENCES routes,
-    data BYTEA
+    data BYTEA,
+    created_at TIMESTAMP,
+    visibility BOOLEAN
 );
 
 CREATE TABLE reviews (
@@ -27,7 +30,9 @@ CREATE TABLE reviews (
     route_id INTEGER REFERENCES routes,
     grade INTEGER NOT NULL,
     review TEXT NOT NULL,
-    created_by INTEGER REFERENCES users
+    created_by INTEGER REFERENCES users,
+    created_at TIMESTAMP,
+    vibility BOOLEAN
 );
 
 CREATE TABLE times (
@@ -36,4 +41,6 @@ CREATE TABLE times (
     runner_id INTEGER REFERENCES routes,
     completion_date DATE,
     completion_time NUMERIC(5,1)
+    created_at TIMESTAMP,
+    visibility BOOLEAN
 );
