@@ -19,6 +19,7 @@ Select route name:
 <p>File<input type="file" name="file"></p>
 <p>
 <input type="submit" value="Save"></p>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% else %}
 Please login

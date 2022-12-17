@@ -36,6 +36,7 @@ Delete added route (removes route info, reviews and running times):
 {% endfor %}
 </select>
 <input type="submit" value="Delete">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 <br>

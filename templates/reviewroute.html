@@ -16,7 +16,7 @@ Select route name:
 </select>
 <br>
 Grade (1-5; 1 = not good, 5 = excellent):<br>
-<select name="grade">
+<select name="grade" required>
 <option value=1>1</option>
 <option value=2>2</option>
 <option value=3>3</option>
@@ -24,9 +24,10 @@ Grade (1-5; 1 = not good, 5 = excellent):<br>
 <option value=5>5</option>
 </select>
 <p>Review:<br>
-<textarea name="review" rows="3" cols="40"></textarea></p>
+<textarea name="review" rows="3" cols="40" required></textarea></p>
 <br>
 <input type="submit" value="Save"></p>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% else %}
 Please login

@@ -18,20 +18,21 @@ Instructions for saving route info:<br>
     <li> Save the basic info below. Continue to save the .jpg map.
 </ol>
 You can also use the route information from your sports watch. 
-<form action="/create" method="POST">
+<form action="/createroute" method="POST">
 <p>Name of the route:<br>
-<input type="text" name="name"></p>
+<input type="text" name="name" required></p>
 <p>Type (round: A to A, linear: A to B):<br>
 <select name="type"><br>
 <option value=Round>A to A</option>
 <option value=Linear>A to B</option>
 </select><br>
 <p>Length in km (format 0.0):<br>
-<input type="numeric" name="length"></p>
+<input type="numeric" name="length" value="0.0"></p>
 <p>Starting coordinates:<br>
 <input type="text" name="coordinates"></p>
 <br>
 <input type="submit" value="Save"></p>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% else %}
 Please login

@@ -3,8 +3,11 @@ import users
 from flask import make_response
 import reviews
 import routes
+import maps
 
-def create(name, type, length, coordinates):
+#Create and delete (=hide) functions
+
+def create_route(name, type, length, coordinates):
     user_id = users.get_user_id()
     if user_id == 0:
         return False
@@ -13,12 +16,12 @@ def create(name, type, length, coordinates):
     db.session.commit()
     return True
 
-def createtime(routename, completion_time, completion_date):
+def create_time(routename, completion_time, completion_date):
     runner_id = users.get_user_id()
     route_id = get_route_id(routename)
     if runner_id == 0:
         return False
-    sql = "INSERT INTO times (route_id, runner_id, completion_date, completion_time, visibility, created_at) VALUES (:route_id, :runner_id, :completion_date, :completion_time, TRUE, NOW())"
+    sql = "INSERT INTO times (route_id, runner_id, completion_date, completion_time, created_at) VALUES (:route_id, :runner_id, :completion_date, :completion_time, NOW())"
     db.session.execute(sql, {"route_id":route_id, "runner_id":runner_id, "completion_date":completion_date, "completion_time":completion_time})
     db.session.commit()
     return True
@@ -27,14 +30,8 @@ def hide_route(id):
     sql = "UPDATE routes SET visibility=FALSE WHERE routes.id=id"
     db.session.execute(sql, {"id":id})
     db.session.commit()
-    hide_time(id)
-    reviews.hide_review(id)
-    routes.hide_map(id)
 
-def hide_time(id):
-    sql = "UPDATE times SET visibility=FALSE WHERE times.route_id=id"
-    result = db.session.execute(sql, {"id":id})
-    db.session.commit()
+#Get functions
 
 def get_routes():
     sql = "SELECT R.name, R.type, R.coordinates, R.length, U.username, R.id FROM routes R, users U WHERE U.id = R.created_by AND R.visibility=TRUE"
@@ -69,4 +66,3 @@ def get_routes_by_user(id):
     sql = "SELECT * FROM routes where created_by=:id AND routes.visibility=TRUE"
     result = db.session.execute(sql, {"id":id})
     return result.fetchall()
-

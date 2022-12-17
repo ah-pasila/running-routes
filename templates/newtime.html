@@ -16,8 +16,9 @@ Select route name:<br>
 <br>
 </select>
 <p>Time in minutes and seconds (format 0.0):<br>
-<input type="numeric" name="completion_time"></p>
+<input type="numeric" name="completion_time" value="0.0" required></p>
 <input type="submit" value="Save"></p>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% else %}
 Please login
