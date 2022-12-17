@@ -1,7 +1,5 @@
-from flask import redirect, render_template, request, session, make_response
+from flask import redirect, render_template, request, session
 from app import app
-from db import db
-import secrets
 import users
 import runroutes
 import maps
@@ -73,8 +71,8 @@ def browseroutes():
 
 @app.route("/deleteroute", methods=["GET", "POST"])
 def deleteroute():
-    routename=request.form["routename"]
-    route_id=runroutes.get_route_id(routename)
+    routename = request.form["routename"]
+    route_id = runroutes.get_route_id(routename)
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
     else:
@@ -153,6 +151,6 @@ def createtime():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
     elif runroutes.create_time(routename, completion_time, completion_date):
-       return redirect("/")
+        return redirect("/")
     else:
-       return render_template("error.html", message="Error while adding a new running time")
+        return render_template("error.html", message="Error while adding a new running time")

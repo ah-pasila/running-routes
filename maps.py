@@ -1,5 +1,5 @@
+from flask import make_response
 from db import db
-from flask import redirect, render_template, request, session, make_response
 import runroutes
 
 #Create functions

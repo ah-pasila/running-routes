@@ -1,7 +1,7 @@
-from db import db
+import secrets
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
-import secrets
+from db import db
 
 #Create functions
 
