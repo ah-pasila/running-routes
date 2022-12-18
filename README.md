@@ -18,15 +18,15 @@ Admins are able to delete users, routes and reviews. Normal users can only delet
 
 ## Note on 18th December 2022:
 
-The latest working version for the evualation: https://tsoha-running-routes.fly.dev/.
+The latest published version: https://tsoha-running-routes.fly.dev/.
 
-If local testing needs to be done, expression ".replace("://", "ql://", 1)" in db.py should be removed.  
+For local testing, expression ".replace("://", "ql://", 1)" in db.py should be removed after cloning codes.  
 
-In the RRH App, user can create and account and login. After this, user can save routes, maps, running times and reviews.
+In the Running Routes Helsinki App, a user can create an account and login. After this, the user can save routes, maps, running times and reviews.
 
-It is possible to browse saved routes, maps and reviews. User can check route information, reviews and times which he/she saved from his/her personal view.
+It is possible to browse saved routes, maps and reviews. The user can check route information, reviews and times which he/she saved from his/her personal view.
 
-Delete (=updating visibility of rows) and admin role functionalities were unfortunately not implemented in the final version. I'm interested in hearing advice how to get UPDATE-based delete functionality running (it seems I did not find proper formulation of the command). 
+Delete (=updating visibility of rows) and admin role functionalities were unfortunately not implemented in the final version. I'm interested in hearing advice how to get UPDATE-based delete functionality up and running (it seems I did not find proper formulation of the command). 
 
 In terms of security, CSRF tokens were taken into use. Measures to avoid SQL injections and XSS vulnerability were also taken. 
 
