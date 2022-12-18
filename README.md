@@ -16,11 +16,18 @@ Users can complete routes and save their times. After doing this, they are able 
 
 Admins are able to delete users, routes and reviews. Normal users can only delete their own reviews and route suggestions.
 
-## Note on 20th November 2022:
+## Note on 18th December 2022:
 
-I was not able to create db in Fly.io and the app can not unfortunately be tested. However, the files are available in Github. So far I have created a simple login window (without password check), mvp form to save info on routes and a route browser.
+The latest working version for the evualation: https://tsoha-running-routes.fly.dev/.
 
-## Note on 4th December 2022:
+If local testing needs to be done, expression ".replace("://", "ql://", 1)" in db.py should be removed.  
 
-The latest working version for the evualation: https://tsoha-running-routes.fly.dev/. It is possible to create user account, sign in, add routes and see the added routes. Also, the structure of the app has been improved. The next not-yet-functioning-version containing the possibilities to add .jpg map and route reviews is under development. In addition to this, layout.html has been created and implemented. The latest codes have been pushed to Github. There is still a lot to do! 
+In the RRH App, user can create and account and login. After this, user can save routes, maps, running times and reviews.
 
+It is possible to browse saved routes, maps and reviews. User can check route information, reviews and times which he/she saved from his/her personal view.
+
+Delete (=updating visibility of rows) and admin role functionalities were unfortunately not implemented in the final version. I'm interested in hearing advice how to get UPDATE-based delete functionality running (it seems I did not find proper formulation of the command). 
+
+In terms of security, CSRF tokens were taken into use. Measures to avoid SQL injections and XSS vulnerability were also taken. 
+
+However, there could be more checks related to the length & type of the data and better error handling.
