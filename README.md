@@ -16,7 +16,7 @@ Users can complete routes and save their times. After doing this, they are able 
 
 Admins are able to delete users, routes and reviews. Normal users can only delete their own reviews and route suggestions.
 
-## Note on 18th December 2022:
+## Note on 18th December 2022
 
 The latest published version: https://tsoha-running-routes.fly.dev/.
 
