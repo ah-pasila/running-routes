@@ -24,7 +24,7 @@ For local testing, expression ".replace("://", "ql://", 1)" in db.py should be r
 
 In the Running Routes Helsinki App, a user can create an account and login. After this, the user can save routes, maps, running times and reviews.
 
-It is possible to browse saved routes, maps and reviews. The user can check route information, reviews and times which he/she saved from his/her personal view.
+It is possible to browse saved routes, maps and reviews. The user can also check route information, reviews and times which he/she saved from his/her personal view.
 
 Delete (=updating visibility of rows) and admin role functionalities were unfortunately not implemented in the final version. I'm interested in hearing advice how to get UPDATE-based delete functionality up and running (it seems I did not find proper formulation of the command). 
 
