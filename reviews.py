@@ -16,11 +16,11 @@ def create_review(routename, grade, review):
 #Get functions
 
 def get_reviews():
-    sql = "SELECT RO.name, U.username, RE.grade, RE.review FROM reviews RE, routes RO, users U WHERE U.id = RE.created_by AND RE.route_id = RO.id AND RO.visibility=TRUE"
+    sql = "SELECT RO.name, U.username, RE.grade, RE.review FROM reviews RE, routes RO, users U WHERE U.id = RE.created_by AND RE.route_id = RO.id"
     reviews = db.session.execute(sql)
     return reviews.fetchall()
 
 def get_reviews_by_user(id):
-    sql = "SELECT RO.name, RE.grade, RE.review FROM routes RO, reviews RE, users U where RE.route_id=RO.id AND RE.created_by=U.id AND RO.visibility=TRUE"
+    sql = "SELECT RO.name, RE.grade, RE.review FROM routes RO, reviews RE, users U where RE.route_id=RO.id AND RE.created_by=U.id AND U.id=:id"
     result = db.session.execute(sql, {"id":id})
     return result.fetchall()

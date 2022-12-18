@@ -27,19 +27,6 @@ You have added these routes to HRR App:<br><br>
 </tbody>
 </table>
 <br>
-Delete added route (removes route info, reviews and running times):
-<form action="/deleteroute" method="POST">
-<br>
-<select name="routename" method="GET" action="/">
-{% for route in routes %}
-<option value="{{ route.name }}" SELECTED>{{route.name}}</option>
-{% endfor %}
-</select>
-<input type="submit" value="Delete">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-<br>
-<br>
 You have added these reviews to HRR App:<br><br>
 <table border=1>
 <thead><tr><th>Route name</th><th>Grade</th><th>Review</th></tr></thead>

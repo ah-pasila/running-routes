@@ -16,7 +16,7 @@ def upload_map(routename, file):
 #Get functions
 
 def get_map(route_id):
-    sql = "SELECT M.data FROM maps M, routes R WHERE M.route_id=:route_id and M.route_id=R.id and R.visibility = TRUE"
+    sql = "SELECT M.data FROM maps M, routes R WHERE M.route_id=:route_id and M.route_id=R.id"
     result = db.session.execute(sql, {"route_id":route_id})
     data = result.fetchone()[0]
     return data

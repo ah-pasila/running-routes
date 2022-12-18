@@ -71,16 +71,6 @@ def browseroutes():
     routes = runroutes.get_routes()
     return render_template("browseroutes.html", routes=routes)
 
-@app.route("/deleteroute", methods=["GET", "POST"])
-def deleteroute():
-    routename=request.form["routename"]
-    route_id=runroutes.get_route_id(routename)
-    if session["csrf_token"] != request.form["csrf_token"]:
-        abort(403)
-    else:
-        runroutes.hide_route(id)
-    return redirect("/")
-
 #Map functions
 
 @app.route("/newmap")
