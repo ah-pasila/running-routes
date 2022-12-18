@@ -1,5 +1,7 @@
-from flask import redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, make_response
 from app import app
+from db import db
+import secrets
 import users
 import runroutes
 import maps
@@ -71,8 +73,8 @@ def browseroutes():
 
 @app.route("/deleteroute", methods=["GET", "POST"])
 def deleteroute():
-    routename = request.form["routename"]
-    route_id = runroutes.get_route_id(routename)
+    routename=request.form["routename"]
+    route_id=runroutes.get_route_id(routename)
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
     else:
@@ -90,27 +92,19 @@ def newmap():
 def uploadmap():
     routename = request.form["routename"]
     file = request.files["file"]
-    filename = file.filename
-    data = file.read()
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
-    elif maps.upload_map(routename, file, filename):
+    elif maps.upload_map(routename, file):
         return redirect("/")
-    elif not filename.endswith(".jpg"):
-        return render_template("error.html", message="Error, invalid format, use .jpg images")
-    elif len(data) > 300*1024:
-        return render_template("error.html", message="Error, file is too big, size limit is 300 kt")
     else:
-        return render_template("error.html", message="Unknown error while saving a map")
+        return render_template("error.html", message="Error while creating a map, check format (.jpg) and size (preferably < 300 kt)")
 
 @app.route("/show/<int:id>")
 def show(id):
-    if not id:
-        return render_template("error.html", message="No map added")
-    else:
-        response = maps.get_map(id)
-        response.headers.set("Content-Type", "image/jpeg")
-        return response
+    data = maps.get_map(id)
+    response = make_response(bytes(data))
+    response.headers.set("Content-Type", "image/jpeg")
+    return response
 
 #Review functions
 
